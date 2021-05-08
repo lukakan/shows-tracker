@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main class="content" layout:fragment="content">
+    <div class="submenu">
+        <ul>
+            <li th:each="genre:${genres}">
+                <a th:href="@{|/genres?category=${genre.name}|}" th:text="${genre.name}"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <ul>
+            <li th:each="movie:${movies}" th:object="${movie}">
+                <h2 class = "movie-title" th:text="|*{title} (*{premiereDate.getYear()})|"></h2>
+                <div class="row m-3">
+                    <div class="col-4">
+                        <img class="movie-image" th:src="@{|/pictures/*{id}.png|}">
+                    </div>
+                    <div class="col-8">
+                        <i class="fas fa-star" th:with="isGreater = ${movie.averageRate &gt; 0.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                        <i class="fas fa-star" th:with="isGreater = ${movie.averageRate &gt; 1.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                        <i class="fas fa-star" th:with="isGreater = ${movie.averageRate &gt; 2.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                        <i class="fas fa-star" th:with="isGreater = ${movie.averageRate &gt; 3.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                        <i class="fas fa-star" th:with="isGreater = ${movie.averageRate &gt; 4.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                        <p class="description" th:text="*{description}"></p>
+                        <p class="description" th:text="${movie.getGenresNames()}"></p>
+                        <p class="description" th:text="|Reżyseria: ${movie.getDirectorName()}|"></p>
+                        <a class="details" th:href="@{|/movies/movie?id=*{id}|}">więcej</a>
+                    </div>
+                </div>
+                <hr>
+            </li>
+        </ul>
+    </div>
+</main>
+</body>
+</html>

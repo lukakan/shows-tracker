@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <header th:fragment="navigation">
+        <nav class="navbar navbar-dark bg-custom navbar-expand-md fixed-top">
+            <div class="navbar-brand bg-custom" href="#"> <i class="fas fa-film"></i> Movie tracker </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link bg-custom" th:href="@{/}"><i class="fas fa-home" ></i> Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <div><a class="nav-link bg-custom" th:href="@{/movies}"> Filmy</a></div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link bg-custom" th:href="@{/}"> Seriale</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link bg-custom" th:href="@{/}"> Aktorzy</a>
+                    </li>
+                    <li class="nav-item mr-auto">
+                        <div class="dropdown mr-auto">
+                            <button class="btn btn-secondary dropdown-toggle bg-custom float-right" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-plus-circle"></i> Dodaj
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" th:href="@{/movies/add}">Film</a>
+                                <a class="dropdown-item" href="#">Osobę</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <footer class="footer" th:fragment="foot">
+            <span class="text-muted">MovieTracker application created by lukakan</span>
+    </footer>
+</body>
+</html>
