@@ -21,10 +21,7 @@
                         <div><a class="nav-link bg-custom" th:href="@{/movies}"> Filmy</a></div>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link bg-custom" th:href="@{/}"> Seriale</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link bg-custom" th:href="@{/}"> Aktorzy</a>
+                        <a class="nav-link bg-custom" th:href="@{/persons}"> Osoby kina</a>
                     </li>
                     <li class="nav-item mr-auto">
                         <div class="dropdown mr-auto">
@@ -33,7 +30,7 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" th:href="@{/movies/add}">Film</a>
-                                <a class="dropdown-item" href="#">Osobę</a>
+                                <a class="dropdown-item" th:href="@{/person/add}">Osobę</a>
                             </div>
                         </div>
                     </li>

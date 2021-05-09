@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main class="content" layout:fragment="content">
+    <div class="submenu">
+        <ul>
+            <li th:each="function:${functions}">
+                <a th:href="@{|/movies/genres?category=${function.name}|}" th:text="${function.name}"></a>
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <ul>
+            <li th:each="person:${persons}" th:object="${person}">
+                <h2 class = "movie-title" th:text="|*{firstName} *{lastName}|"></h2>
+                <div class="row m-3">
+                    <div class="col-8">
+                        <p class="description" th:text="*{birthDate}"></p>
+                        <p class="description" th:text="*{gender}"></p>
+                        <p class="description" th:text="*{country}"></p>
+                        <p class="description"> funkcje:
+                            <ul class="description" style="display: flex; font-size: 20px;">
+                                <li style="margin-right: auto" class="m-2" th:each="f:${person.functions()}">
+                                    <p th:text="|${f.name}|"></p>
+                                </li>
+                            </ul>
+                        </p>
+
+                    </div>
+                </div>
+                <hr>
+            </li>
+        </ul>
+    </div>
+</main>
+</body>
+</html>

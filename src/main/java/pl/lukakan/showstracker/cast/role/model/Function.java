@@ -1,4 +1,4 @@
-package pl.lukakan.showstracker.cast;
+package pl.lukakan.showstracker.cast.role.model;
 
 import javax.persistence.*;
 import java.util.List;

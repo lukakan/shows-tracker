@@ -1,8 +1,15 @@
-package pl.lukakan.showstracker.cast;
+package pl.lukakan.showstracker.cast.person.model;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import pl.lukakan.showstracker.cast.person.model.Gender;
+import pl.lukakan.showstracker.cast.role.model.Function;
+import pl.lukakan.showstracker.cast.role.model.Role;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class Person {
@@ -11,10 +18,27 @@ public class Person {
     private Long id;
     private String firstName;
     private String lastName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private String country;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @OneToMany(mappedBy = "person")
+    private List<Role> roles;
+
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public Set<Function> functions() {
+        return roles.stream().map(Role::getFunction).collect(Collectors.toSet());
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;

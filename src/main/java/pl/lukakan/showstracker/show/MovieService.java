@@ -2,7 +2,7 @@ package pl.lukakan.showstracker.show;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.lukakan.showstracker.cast.Role;
+import pl.lukakan.showstracker.cast.role.model.Role;
 import pl.lukakan.showstracker.show.model.Genre;
 import pl.lukakan.showstracker.show.model.Movie;
 import pl.lukakan.showstracker.show.repository.GenreRepository;
@@ -28,6 +28,8 @@ public class MovieService {
     }
 
     public void add(Movie movie) {
+        movie.getGenres().forEach(genre -> genre.removeMovie(movie));
+        movie.getGenres().forEach(genre -> genre.addMovie(movie));
         movieRepository.save(movie);
     }
 

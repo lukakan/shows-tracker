@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main class="content" layout:fragment="content">
+    <!--        <form th:method="post" th:action="${action} == 'add' ? @{/movies/add} : @{/update}" th:object="${movie}" name="add new movie">-->
+    <form th:method="post" th:action="@{|/movie/${movieId}/role/add|}" th:object="${role}" name="add new person">
+        <div class="d-flex justify-content-center mt-5">
+            <div class="col-10 col-md-5 mt-5">
+
+                <div class="m-3">
+                    <label for="movie-id" class="form-label">ID Filmu</label>
+                    <input type=text th:value="${movieId}" id="movie-id" class="form-control" readonly>
+                </div>
+
+                <div class="m-3">
+                    <label for="id" class="form-label">ID roli</label>
+                    <input type=text th:field="*{id}" id="id" class="form-control" readonly>
+                </div>
+
+                <div class="m-3">
+                    <label for="role_name" class="form-label">Nazwa roli</label>
+                    <input id="role_name" type="text" class="form-control" th:field="*{name}">
+                </div>
+
+                <div class="m-3">
+                    <label for="function" class="form-label">Funkcja w filmie</label>
+                    <select id="function" th:field="*{function}" class="form-select">
+                        <option th:each="function:${functions}" th:value="${function.id}"
+                                th:text="${function.name}"></option>
+                    </select>
+                </div>
+
+                <div class="m-3">
+                    <label for="person" class="form-label">Osoba wybierz osobę z listy lub stworz nową gdy nie ma jej na liście</label>
+                    <input list="functions" th:field="*{person}" id="person" class="form-select"/>
+                    <datalist id="functions">
+                        <option th:each="person:${persons}" th:value="${person.id}"
+                                th:label="|${person.firstName} ${person.lastName}|"></option>
+                    </datalist>
+                </div>
+
+                <div class="m-3" th:unless="${editmode==true}">
+                    <button type="submit" class="btn btn-dark px-3" id="form-button1">Dodaj role</button>
+                </div>
+                <div class="m-3" th:if="${editmode==true}">
+                    <button type="submit" class="btn btn-dark px-3" id="form-button2">Zaaktualizuj role</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+</html>

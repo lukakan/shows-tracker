@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main class="content" layout:fragment="content">
+    <div class="container">
+        <div class="row m-3" th:object="${movieToDisplay}">
+            <h2 th:text="|*{title} (*{premiereDate.getYear()})|"></h2>
+            <div class="col-4">
+                <img class="movie-image" th:src="@{|/pictures/*{id}.png|}">
+            </div>
+            <div class="col-8">
+                <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 0.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 1.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 2.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 3.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 4.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                <p class="description" th:text="*{description}"></p>
+                <p class="description" th:text="${movieToDisplay.getGenresNames()}"></p>
+                <p class="description" th:text="|Reżyseria: ${movieToDisplay.getDirectorName()}|"></p>
+                <p class="description" th:text="|Data premiery: *{premiereDate}|"></p>
+                <span th:if="${movieToDisplay.averageRate!=null}">
+                        <p class="description" th:text="|Srednia ocen: *{averageRate}|"></p>
+                        <p class="description" th:text="|Ilosc ocen: *{numberOfRates}|"></p>
+                    </span>
+                <a class="details-link" th:href = "@{|/movies/*{id}/edit/editDetails|}"><i class="fas fa-wrench"></i> Dodwanie / Edycja szczegółów</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cast-header col-12">
+                <h2> OBSADA </h2>
+            </div>
+            <div class="col-12 edit-link">
+                <a class="details-link" th:href="@{|/movie/${movieToDisplay.id}/role/add|}">
+                    Dodaj role <i class="fas fa-plus"></i>
+                </a>
+            </div>
+            <ul>
+                <li th:each="role:${roles}">
+                    <div class="col-4 mt-5 cast">
+                        <p class="actor" th:text="|${role.getPerson().getFirstName()} ${role.getPerson().getLastName()}|"></p>
+                        <p> jako </p>
+                        <p th:text="${role.name}"></p>
+                        <hr>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>

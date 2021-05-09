@@ -1,16 +1,12 @@
 package pl.lukakan.showstracker.show.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.lukakan.showstracker.cast.Person;
-import pl.lukakan.showstracker.cast.Role;
+import pl.lukakan.showstracker.cast.role.model.Role;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Entity
 public class Movie {
@@ -26,16 +22,20 @@ public class Movie {
     @OneToMany(mappedBy = "movie")
     private List<Role> roles;
     @ManyToMany(mappedBy = "movies")
-    private List<Genre> genres;
+    private Set<Genre> genres;
 
     public Movie() {
 
     }
 
-//    public void addGenres(Genre genre) {
-//        genre.addMovie(this);
-//        genres.add(genre);
-//    }
+    public void addGenre(Genre genre) {
+        genre.addMovie(this);
+        genres.add(genre);
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
 
     public String getGenresNames() {
         return genres.stream()
@@ -46,7 +46,7 @@ public class Movie {
     public String getDirectorName() {
         return roles.stream()
                 .filter(role -> role.getFunction().getName().equals("Director"))
-                .map(role -> role.getPerson().getFirstName() + " " + role.getPerson().getLastName())
+                .map(role -> role.getPerson().getFirstName() + " " + role.getPerson().getLastName() + " ")
                 .reduce(String::concat).orElse("");
     }
 
@@ -107,11 +107,11 @@ public class Movie {
     }
 
 
-    public List<Genre> getGenres() {
+    public Set<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(Set<Genre> genres) {
         this.genres = genres;
     }
 }

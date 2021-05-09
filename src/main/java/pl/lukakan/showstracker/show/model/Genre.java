@@ -19,10 +19,13 @@ public class Genre {
     public Genre() {
     }
 
-//    public void addMovie(Movie movie) {
-//        movie.addGenres(this);
-//        movies.add(movie);
-//    }
+    public void addMovie(Movie movieToAdd) {
+        movies.add(movieToAdd);
+    }
+
+    public void removeMovie(Movie movieToRemove) {
+        movies.removeIf(movie -> movie.equals(movieToRemove));
+    }
 
     public Genre(String name) {
         this.name = name;

@@ -110,12 +110,12 @@ a:hover{
     font-size: 20px;
 }
 
-.details{
+.details-link{
     font-size: 20px;
     color: #ecdb00;
 }
 
-.details:hover{
+.details-link:hover{
     color: crimson;
 }
 
@@ -133,5 +133,11 @@ a:hover{
     background-color: #36D6E7;
     text-align: center;
     margin: 30px auto auto;
+}
+
+.edit-link{
+    border: solid;
+    border-width: thin;
+    padding: 5px;
 }
 

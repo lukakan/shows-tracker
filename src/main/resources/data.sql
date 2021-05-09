@@ -2,7 +2,7 @@ INSERT INTO person (first_name, last_name, birth_date, country, gender)
 VALUES ('Clint', 'Eastwood', '1930-05-31', 'USA', 'MALE'),
        ('Johnny', 'Deep', '1963-06-09', 'USA', 'MALE'),
        ('John Carroll', 'Lynch', '1963-08-01', 'USA', 'MALE'),
-       ('Helena Bonham', 'Carter', '1966-05-26', 'England', 'FEMALE'),
+       ('Helena Bonham', 'Carter', '1966-05-26', 'Anglia', 'FEMALE'),
        ('Tim', 'Burton', '1958-08-25', 'USA', 'MALE');
 
 INSERT INTO function (name)

@@ -1,5 +1,6 @@
-package pl.lukakan.showstracker.cast;
+package pl.lukakan.showstracker.cast.role.model;
 
+import pl.lukakan.showstracker.cast.person.model.Person;
 import pl.lukakan.showstracker.show.model.Movie;
 
 import javax.persistence.*;

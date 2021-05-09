@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.lukakan.showstracker.cast.Role;
+import pl.lukakan.showstracker.cast.role.model.Role;
 import pl.lukakan.showstracker.show.model.Genre;
 import pl.lukakan.showstracker.show.model.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +33,7 @@ public class MovieController {
     }
 
 
-    @GetMapping("/genres")
+    @GetMapping("movies/genres")
     public String moviesInCategoryPage(@RequestParam(name = "category") String genreName, Model model) {
         List<Movie> movies = movieService.getMoviesInGenre(genreName);
         List<Genre> genres = movieService.getAllGenres();
@@ -60,16 +60,54 @@ public class MovieController {
 
     @GetMapping("/movies/add")
     public String addMovieForm(Model model) {
-        List<Genre> selectionList = new ArrayList<>();
         model.addAttribute("action", "add");
         model.addAttribute("movie", new Movie());
         model.addAttribute("allGenres", movieService.getAllGenres());
+        model.addAttribute("editmode", false);
         return "movie/add";
     }
 
     @PostMapping("/movies/add")
     public String addMovie(Movie movieToAdd) {
         movieService.add(movieToAdd);
-        return "redirect:/movies";
+        Long id = movieToAdd.getId();
+        return "redirect:/movies/" + id + "/edit";
+    }
+
+    @GetMapping("/movies/{id}/edit")
+    public String movieEditPage(@PathVariable(name = "id") Long movieId, Model model) {
+        Optional<Movie> movie = movieService.getById(movieId);
+
+        if (movie.isPresent()) {
+            List<Role> actors = movieService.getActors(movie.get());
+            model.addAttribute("movieToDisplay", movie.get());
+            model.addAttribute("roles", actors);
+            return "movie/edit";
+        } else {
+            model.addAttribute("msg", "not found");
+            return "error";
+        }
+    }
+
+    @GetMapping("/movies/{id}/edit/editDetails")
+    public String movieEditDetailsForm(@PathVariable(name = "id") Long movieId, Model model) {
+        Optional<Movie> movie = movieService.getById(movieId);
+
+        if (movie.isPresent()) {
+            model.addAttribute("movie", movie.get());
+            model.addAttribute("allGenres", movieService.getAllGenres());
+            model.addAttribute("action", "update");
+            model.addAttribute("editmode", true);
+            return "movie/add";
+        } else {
+            model.addAttribute("msg", "not found");
+            return "error";
+        }
+    }
+
+    @PostMapping("/movies/{id}/edit/editDetails")
+    public String movieEditDetails(@PathVariable(name = "id") Long movieId, Movie movie) {
+        movieService.add(movie);
+        return "redirect:/movies/" + movieId + "/edit";
     }
 }
