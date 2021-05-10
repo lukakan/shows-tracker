@@ -9,11 +9,11 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToMany
-    @JoinTable(
-            name = "genres_movies",
-            joinColumns = @JoinColumn(name = "genre_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    @ManyToMany(mappedBy = "genres")
+//    @JoinTable(
+//            name = "genres_movies",
+//            joinColumns = @JoinColumn(name = "genre_id"),
+//            inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private List<Movie> movies;
 
     public Genre() {
@@ -24,7 +24,7 @@ public class Genre {
     }
 
     public void removeMovie(Movie movieToRemove) {
-        movies.removeIf(movie -> movie.equals(movieToRemove));
+        movies.remove(movieToRemove);
     }
 
     public Genre(String name) {

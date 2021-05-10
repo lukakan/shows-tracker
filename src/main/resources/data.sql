@@ -36,9 +36,9 @@ VALUES ('Walt Kowalski', 1, 1, 2),
        ('Ms. Lovett', 4, 2, 2),
        ('', 5, 2, 1);
 
-INSERT INTO genres_movies(genre_id, movie_id)
-VALUES (4, 1),
-       (5, 2),
-       (8, 2),
-       (9, 3),
-       (4, 3);
+INSERT INTO movies_genres(movie_id, genre_id)
+VALUES (1, 4),
+       (2, 5),
+       (2, 8),
+       (3, 9),
+       (3, 4);

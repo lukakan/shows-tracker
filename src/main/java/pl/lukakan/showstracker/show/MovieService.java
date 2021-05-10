@@ -28,8 +28,6 @@ public class MovieService {
     }
 
     public void add(Movie movie) {
-        movie.getGenres().forEach(genre -> genre.removeMovie(movie));
-        movie.getGenres().forEach(genre -> genre.addMovie(movie));
         movieRepository.save(movie);
     }
 

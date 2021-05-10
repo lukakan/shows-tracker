@@ -21,7 +21,11 @@ public class Movie {
     private Integer numberOfRates;
     @OneToMany(mappedBy = "movie")
     private List<Role> roles;
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany
+    @JoinTable(
+            name = "movies_genres",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres;
 
     public Movie() {
@@ -31,6 +35,11 @@ public class Movie {
     public void addGenre(Genre genre) {
         genre.addMovie(this);
         genres.add(genre);
+    }
+
+    public void removeGenre(Genre genre) {
+        genre.removeMovie(this);
+        genres.remove(genre);
     }
 
     public void addRole(Role role) {
