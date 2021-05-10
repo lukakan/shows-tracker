@@ -4,6 +4,8 @@ import pl.lukakan.showstracker.cast.person.model.Person;
 import pl.lukakan.showstracker.show.model.Movie;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Role {
@@ -15,7 +17,7 @@ public class Role {
     private Person person;
     @ManyToOne
     private Movie movie;
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private Function function;
 
     public Long getId() {

@@ -34,7 +34,7 @@
                     <div class="m-3">
                         <label for="gender" class="form-label">Płeć</label>
                         <select id = "gender" th:field="*{gender}">
-                            <option th:each="gender:${genders}" th:value="${gender}" th:text="${gender.description}"></option>
+                            <option th:each="gender:${genders}" th:value="${gender}" th:text="${gender.name}"></option>
                         </select>
                     </div>
 

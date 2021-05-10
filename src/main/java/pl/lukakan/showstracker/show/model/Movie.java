@@ -1,6 +1,7 @@
 package pl.lukakan.showstracker.show.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
 
 import javax.persistence.*;
@@ -32,15 +33,10 @@ public class Movie {
 
     }
 
-    public void addGenre(Genre genre) {
-        genre.addMovie(this);
-        genres.add(genre);
-    }
-
-    public void removeGenre(Genre genre) {
-        genre.removeMovie(this);
-        genres.remove(genre);
-    }
+//    public void removeGenre(Genre genre) {
+//        genre.removeMovie(this);
+//        genres.remove(genre);
+//    }
 
     public void addRole(Role role) {
         roles.add(role);
@@ -54,7 +50,7 @@ public class Movie {
 
     public String getDirectorName() {
         return roles.stream()
-                .filter(role -> role.getFunction().getName().equals("Director"))
+                .filter(role -> role.getFunction().equals(Function.DIRECTOR))
                 .map(role -> role.getPerson().getFirstName() + " " + role.getPerson().getLastName() + " ")
                 .reduce(String::concat).orElse("");
     }

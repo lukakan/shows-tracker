@@ -10,22 +10,15 @@ public class Genre {
     private Long id;
     private String name;
     @ManyToMany(mappedBy = "genres")
-//    @JoinTable(
-//            name = "genres_movies",
-//            joinColumns = @JoinColumn(name = "genre_id"),
-//            inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private List<Movie> movies;
 
     public Genre() {
     }
 
-    public void addMovie(Movie movieToAdd) {
-        movies.add(movieToAdd);
-    }
 
-    public void removeMovie(Movie movieToRemove) {
-        movies.remove(movieToRemove);
-    }
+//    public void removeMovie(Movie movieToRemove) {
+//        movies.remove(movieToRemove);
+//    }
 
     public Genre(String name) {
         this.name = name;

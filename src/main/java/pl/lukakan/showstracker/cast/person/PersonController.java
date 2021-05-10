@@ -20,7 +20,7 @@ public class PersonController {
     @GetMapping("/persons")
     public String getPersonsPage(Model model) {
         model.addAttribute("persons", personService.findAllPersons());
-        model.addAttribute("functions", personService.findAllFunctions());
+        model.addAttribute("functions", personService.getFunctions());
         return "/person/list";
     }
 

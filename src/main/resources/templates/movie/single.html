@@ -15,11 +15,21 @@
                     <img class="movie-image" th:src="@{|/pictures/*{id}.png|}">
                 </div>
                 <div class="col-8">
-                    <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 0.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
-                    <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 1.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
-                    <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 2.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
-                    <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 3.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
-                    <i class="fas fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 4.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                    <a th:href="@{|/movies/rate?id=*{id}&rate=1|}" style="color: black">
+                        <i class="fas fa-star-h fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 0.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                    </a>
+                    <a th:href="@{|/movies/rate?id=*{id}&rate=2|}" style="color: black">
+                        <i class="fas fa-star-h fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 1.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                    </a>
+                    <a th:href="@{|/movies/rate?id=*{id}&rate=3|}" style="color: black">
+                        <i class="fas fa-star-h fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 2.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                    </a>
+                    <a th:href="@{|/movies/rate?id=*{id}&rate=4|}" style="color: black">
+                        <i class="fas fa-star-h fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 3.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                    </a>
+                    <a th:href="@{|/movies/rate?id=*{id}&rate=5|}" style="color: black">
+                        <i class="fas fa-star-h fa-star" th:with="isGreater = ${movieToDisplay.averageRate &gt; 4.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
+                    </a>
                     <p class="description" th:text="*{description}"></p>
                     <p class="description" th:text="${movieToDisplay.getGenresNames()}"></p>
                     <p class="description" th:text="|Reżyseria: ${movieToDisplay.getDirectorName()}|"></p>

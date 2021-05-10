@@ -1,28 +1,15 @@
 package pl.lukakan.showstracker.cast.role.model;
 
-import javax.persistence.*;
-import java.util.List;
+public enum Function {
+    ACTOR("Aktor"), DIRECTOR("Reżyser"), WRITER("Scenarzysta");
 
-@Entity
-public class Function {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
+    private final String name;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    Function(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

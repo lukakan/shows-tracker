@@ -19,19 +19,16 @@
         <ul>
             <li th:each="person:${persons}" th:object="${person}">
                 <h2 class = "movie-title" th:text="|*{firstName} *{lastName}|"></h2>
+                <ul class="description" style="display: flex; font-size: 20px;">
+                    <li style="margin-right: 6px; font-style: italic;" th:each="f:${person.functions()}">
+                        <p th:text="|${f.name}|"></p>
+                    </li>
+                </ul>
                 <div class="row m-3">
                     <div class="col-8">
-                        <p class="description" th:text="*{birthDate}"></p>
-                        <p class="description" th:text="*{gender}"></p>
-                        <p class="description" th:text="*{country}"></p>
-                        <p class="description"> funkcje:
-                            <ul class="description" style="display: flex; font-size: 20px;">
-                                <li style="margin-right: auto" class="m-2" th:each="f:${person.functions()}">
-                                    <p th:text="|${f.name}|"></p>
-                                </li>
-                            </ul>
-                        </p>
-
+                        <p class="description" th:text="|Data urodzenia: *{birthDate}|"></p>
+                        <p class="description" th:text="|Płeć: *{gender.name}|"></p>
+                        <p class="description" th:text="|Kraj: *{country}|"></p>
                     </div>
                 </div>
                 <hr>

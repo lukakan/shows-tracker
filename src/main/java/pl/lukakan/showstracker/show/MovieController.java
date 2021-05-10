@@ -69,7 +69,7 @@ public class MovieController {
 
     @PostMapping("/movies/add")
     public String addMovie(Movie movieToAdd) {
-        movieService.add(movieToAdd);
+        movieService.save(movieToAdd);
         Long id = movieToAdd.getId();
         return "redirect:/movies/" + id + "/edit";
     }
@@ -107,7 +107,13 @@ public class MovieController {
 
     @PostMapping("/movies/{id}/edit/editDetails")
     public String movieEditDetails(@PathVariable(name = "id") Long movieId, Movie movie) {
-        movieService.add(movie);
+        movieService.save(movie);
         return "redirect:/movies/" + movieId + "/edit";
+    }
+
+    @GetMapping("/movies/rate")
+    public String rateMovie(@RequestParam(name = "rate") Double rate, @RequestParam(name = "id") Long movieId) {
+        movieService.rateMovie(movieId, rate);
+        return "redirect:/movies/movie?id=" + movieId;
     }
 }
