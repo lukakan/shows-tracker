@@ -9,12 +9,19 @@
 
     <main class="content" layout:fragment="content">
         <form th:method="post" th:action="${action} == 'add' ? @{/movies/add} : @{|/movies/${movie.id}/edit/editDetails|}" th:object="${movie}" name="add new movie">
-<!--        <form th:method="post" th:action="@{/movies/add}" th:object="${movie}" name="add new movie">-->
             <div class="d-flex justify-content-center mt-5">
                 <div class="col-10 col-md-5 mt-5">
                     <div class="m-3" th:if="${editmode == true}">
                         <label for="id" class="form-label">ID</label>
                         <input type = text th:field="*{id}" id="id" class="form-control" readonly>
+                    </div>
+                    <div class="m-3" th:if="${editmode == true}">
+                        <label for="rate" class="form-label">Srednia ocen</label>
+                        <input type = text th:field="*{averageRate}" id="rate" class="form-control" readonly>
+                    </div>
+                    <div class="m-3" th:if="${editmode == true}">
+                        <label for="noOfRates" class="form-label">Liczba ocen</label>
+                        <input type = text th:field="*{numberOfRates}" id="noOfRates" class="form-control" readonly>
                     </div>
                     <div class="m-3">
                         <label for="title" class="form-label">Tytuł filmu</label>

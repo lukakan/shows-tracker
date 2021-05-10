@@ -9,7 +9,6 @@
     <main class="content" layout:fragment="content">
         <div class="container">
             <div class="row m-3" th:object="${movieToDisplay}">
-                <a class="details-link" th:href = "@{|/movies/*{id}/edit|}"><i class="fas fa-wrench"></i> Widok Edycji</a>
                 <h2 th:text="|*{title} (*{premiereDate.getYear()})|"></h2>
                 <div class="col-4">
                     <img class="movie-image" th:src="@{|/pictures/*{id}.png|}">
@@ -38,7 +37,7 @@
                         <p class="description" th:text="|Srednia ocen: *{averageRate}|"></p>
                         <p class="description" th:text="|Ilosc ocen: *{numberOfRates}|"></p>
                     </span>
-                    <a class="details-link" th:href = "@{|/movies/*{id}/edit|}"><i class="fas fa-wrench"></i> Widok Edycji</a>
+                    <a class="details-link" th:href = "@{|/movies/*{id}/edit|}"><i class="fas fa-wrench"></i> Przejdź do widoku edycji</a>
                 </div>
             </div>
 
