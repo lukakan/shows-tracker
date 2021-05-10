@@ -116,4 +116,10 @@ public class MovieController {
         movieService.rateMovie(movieId, rate);
         return "redirect:/movies/movie?id=" + movieId;
     }
+
+    @GetMapping("/movies/{id}/remove")
+    public String removeMovie(@PathVariable(name = "id") Long id) {
+        movieService.remove(id);
+        return "redirect:/movies";
+    }
 }

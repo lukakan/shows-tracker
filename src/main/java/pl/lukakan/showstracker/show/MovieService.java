@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
+import pl.lukakan.showstracker.cast.role.repository.RoleRepository;
 import pl.lukakan.showstracker.show.model.Genre;
 import pl.lukakan.showstracker.show.model.Movie;
 import pl.lukakan.showstracker.show.repository.GenreRepository;
@@ -19,11 +20,13 @@ import java.util.stream.Collectors;
 public class MovieService {
     private final MovieRepository movieRepository;
     private final GenreRepository genreRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public MovieService(MovieRepository movieRepository, GenreRepository genreRepository) {
+    public MovieService(MovieRepository movieRepository, GenreRepository genreRepository, RoleRepository roleRepository) {
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
+        this.roleRepository = roleRepository;
     }
 
     public Optional<Movie> getById(Long id) {
@@ -32,6 +35,12 @@ public class MovieService {
 
     public void save(Movie movie) {
         movieRepository.save(movie);
+    }
+
+    public void remove(Long movieId) {
+        Movie movieToRemove = findById(movieId);
+        movieToRemove.getRoles().forEach(roleRepository::delete);
+        movieRepository.delete(movieToRemove);
     }
 
     public List<Role> getActors(Movie movie) {

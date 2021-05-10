@@ -33,14 +33,10 @@ public class Movie {
 
     }
 
-//    public void removeGenre(Genre genre) {
-//        genre.removeMovie(this);
-//        genres.remove(genre);
-//    }
-
     public void addRole(Role role) {
         roles.add(role);
     }
+
 
     public String getGenresNames() {
         return genres.stream()
