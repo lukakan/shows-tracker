@@ -39,7 +39,6 @@ public class RoleService {
         Movie movie = movieRepository.findById(movieId).get();
         role.setMovie(movie);
         roleRepository.save(role);
-        movie.addRole(role);
     }
 
 }

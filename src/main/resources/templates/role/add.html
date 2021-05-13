@@ -8,7 +8,7 @@
 <body>
 <main class="content" layout:fragment="content">
     <!--        <form th:method="post" th:action="${action} == 'add' ? @{/movies/add} : @{/update}" th:object="${movie}" name="add new movie">-->
-    <form th:method="post" th:action="@{|/movie/${movieId}/role/add|}" th:object="${role}" name="add new person">
+    <form th:method="post" th:action="@{|/movie/${movieId}/role/add|}" th:object="${role}" name="add new person" autocomplete="off">
         <div class="d-flex justify-content-center mt-5">
             <div class="col-10 col-md-5 mt-5">
 
@@ -39,8 +39,10 @@
                     <label for="person" class="form-label">Osoba wybierz osobę z listy lub stworz nową gdy nie ma jej na liście</label>
                     <input list="functions" th:field="*{person}" id="person" class="form-select"/>
                     <datalist id="functions">
-                        <option th:each="person:${persons}" th:value="${person.id}"
-                                th:label="|${person.firstName} ${person.lastName}|"></option>
+                        <option th:each="person:${persons}"
+                                 th:value="${person.id}"
+                            th:label="|${person.firstName} ${person.lastName}|">
+                        </option>
                     </datalist>
                 </div>
 

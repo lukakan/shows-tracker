@@ -30,7 +30,8 @@
                         <i class="fas fa-star" th:with="isGreater = ${movie.averageRate &gt; 3.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
                         <i class="fas fa-star" th:with="isGreater = ${movie.averageRate &gt; 4.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>
                         <p class="description" th:text="*{description}"></p>
-                        <p class="description" th:text="${movie.getGenresNames()}"></p>
+                        <span class="description" th:each="genre, iterateStat:${movie.genres}" th:text="!${iterateStat.last} ? ${genre.name} + ', ' : ${genre.name}"></span>
+                        </br>
                         <p class="description" th:text="|Reżyseria: ${movie.getDirectorName()}|"></p>
                         <a class="details-link" th:href="@{|/movies/movie?id=*{id}|}">więcej</a>
                     </div>

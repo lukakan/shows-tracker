@@ -1,5 +1,6 @@
 package pl.lukakan.showstracker.show.model;
 
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
@@ -33,17 +34,7 @@ public class Movie {
 
     }
 
-    public void addRole(Role role) {
-        roles.add(role);
-    }
-
-
-    public String getGenresNames() {
-        return genres.stream()
-                .map(genre -> genre.getName() + " ")
-                .reduce(String::concat).orElse("no info");
-    }
-
+    /*TODO: figure out how to replace this function by service*/
     public String getDirectorName() {
         return roles.stream()
                 .filter(role -> role.getFunction().equals(Function.DIRECTOR))

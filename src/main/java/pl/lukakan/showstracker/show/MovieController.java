@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
 import pl.lukakan.showstracker.show.model.Genre;
 import pl.lukakan.showstracker.show.model.Movie;

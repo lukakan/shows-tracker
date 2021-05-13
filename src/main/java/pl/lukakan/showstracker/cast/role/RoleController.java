@@ -13,12 +13,10 @@ import pl.lukakan.showstracker.show.MovieService;
 public class RoleController {
 
     private final RoleService roleService;
-    private final MovieService movieService;
 
     @Autowired
-    public RoleController(RoleService roleService, MovieService movieService) {
+    public RoleController(RoleService roleService) {
         this.roleService = roleService;
-        this.movieService = movieService;
     }
 
     @GetMapping("/movie/{id}/role/add")
