@@ -15,11 +15,6 @@ public class Genre {
     public Genre() {
     }
 
-
-//    public void removeMovie(Movie movieToRemove) {
-//        movies.remove(movieToRemove);
-//    }
-
     public Genre(String name) {
         this.name = name;
     }

@@ -8,7 +8,7 @@
 <body>
 
     <main class="content" layout:fragment="content">
-        <form th:method="post" th:action="${action} == 'add' ? @{/movies/add} : @{|/movies/${movie.id}/edit/editDetails|}" th:object="${movie}" name="add new movie">
+        <form enctype="multipart/form-data" th:method="post" th:action="${action} == 'add' ? @{/movies/add} : @{|/movies/${movie.id}/edit/editDetails|}" th:object="${movie}" name="add new movie">
             <div class="d-flex justify-content-center mt-5">
                 <div class="col-10 col-md-5 mt-5">
                     <div class="m-3" th:if="${editmode == true}">
@@ -39,6 +39,14 @@
                     <div class="m-3">
                         <label for="description" class="form-label">Opis</label>
                         <textarea id="description" class="form-control" rows="10" th:field="*{description}"></textarea>
+                    </div>
+                    <div class="m-3 form-group">
+                        <label for="posterImage">Plik z plakatem</label>
+                        <input typ="hidden" th:field="*{posterImageName}">
+                        <input type="file" name="posterImage" class="form-control-file" id="posterImage" accept="image/png, image/jpeg, image/jpg">
+                        <p>
+                            <img src="..." alt="podgląd wybranego plakatu" class="img-thumbnail" id="thumbnail" width="200">
+                        </p>
                     </div>
                     <div class="m-3" th:unless="${editmode.equals(true)}">
                         <button type="submit" class="btn btn-dark px-3" id="form-button1">Dodaj film</button>

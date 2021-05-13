@@ -1,7 +1,10 @@
 package pl.lukakan.showstracker.show;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
 import pl.lukakan.showstracker.cast.role.repository.RoleRepository;
@@ -10,6 +13,7 @@ import pl.lukakan.showstracker.show.model.Movie;
 import pl.lukakan.showstracker.show.repository.GenreRepository;
 import pl.lukakan.showstracker.show.repository.MovieRepository;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -35,6 +39,23 @@ public class MovieService {
 
     public void save(Movie movie) {
         movieRepository.save(movie);
+    }
+
+    public void saveMovieWithPicture(Movie movie, MultipartFile file) {
+        Movie movieWithId;
+        if (movie.getId() == null) {
+            movieWithId = movieRepository.save(movie);
+        } else {
+            movieWithId = movie;
+        }
+
+        try {
+            String posterFileName = FileUploadUtils.saveFileAndReturnFileName(movieWithId.getMoviePosterSaveDir(), movieWithId.getId(), movieWithId.getTitle(), file);
+            movieWithId.setPosterImageName(posterFileName);
+            movieRepository.save(movieWithId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void remove(Long movieId) {

@@ -16,13 +16,16 @@ VALUES ('COMEDY'),
        ('MUSICAL'),
        ('WESTERN');
 
-INSERT INTO movie(title, premiere_date, description)
+INSERT INTO movie(title, premiere_date, description, poster_image_name)
 VALUES ('Gran Torino', '2008-12-09',
-        'Walt Kowalski to emerytowany weteran żyjący we własnym poukładanym świecie. Jego spokój zostaje zburzony przez nowych sąsiadów z Azji, których syn spróbuje ukraść mu ulubione auto.'),
+        'Walt Kowalski to emerytowany weteran żyjący we własnym poukładanym świecie. Jego spokój zostaje zburzony przez nowych sąsiadów z Azji, których syn spróbuje ukraść mu ulubione auto.',
+        '1_Gran_Torino_2021-05-01.png'),
        ('SWEENEY TODD', '2007-12-03',
-        'Golibroda wraca do wiktoriańskiego Londynu, by zemścić się na porywaczu żony i córki. We współpracy z sąsiadką otwiera zakład fryzjerski, dzięki któremu restauracja wspólniczki zaopatrywana jest w nadzienie do pasztecików.'),
+        'Golibroda wraca do wiktoriańskiego Londynu, by zemścić się na porywaczu żony i córki. We współpracy z sąsiadką otwiera zakład fryzjerski, dzięki któremu restauracja wspólniczki zaopatrywana jest w nadzienie do pasztecików.',
+        '2_Sweeney Tod_2021-05-02.png'),
        ('Nowiny ze świata', '2020-12-25',
-        'Jego akcja toczy się krótko po zakończeniu wojny secesyjnej. Głównym bohaterem historii jest weteran, kapitan Jeffrey Kidd (niezawodny Tom Hanks), który jeździ od miasta do miasta i za niewielką opłatą czyta mieszkańcom miasteczek wiadomości.');
+        'Jego akcja toczy się krótko po zakończeniu wojny secesyjnej. Głównym bohaterem historii jest weteran, kapitan Jeffrey Kidd (niezawodny Tom Hanks), który jeździ od miasta do miasta i za niewielką opłatą czyta mieszkańcom miasteczek wiadomości.',
+        '3_Nowiny ze świata_21-05-02.png');
 
 INSERT INTO role(name, person_id, movie_id, function)
 VALUES ('Walt Kowalski', 1, 1, 'ACTOR'),

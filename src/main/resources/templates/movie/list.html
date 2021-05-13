@@ -21,7 +21,7 @@
                 <h2 class = "movie-title" th:text="|*{title} (*{premiereDate.getYear()})|"></h2>
                 <div class="row m-3">
                     <div class="col-4">
-                        <img class="movie-image" th:src="@{|/pictures/*{id}.png|}">
+                        <img class="movie-image" th:src="@{${movie.posterImagePath}}">
                     </div>
                     <div class="col-8">
                         <i class="fas fa-star" th:with="isGreater = ${movie.averageRate &gt; 0.5}" th:classappend="${isGreater ? 'checked' : ''}"></i>

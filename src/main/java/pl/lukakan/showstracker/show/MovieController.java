@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
 import pl.lukakan.showstracker.show.model.Genre;
@@ -69,8 +70,12 @@ public class MovieController {
     }
 
     @PostMapping("/movies/add")
-    public String addMovie(Movie movieToAdd) {
-        movieService.save(movieToAdd);
+    public String addMovie(Movie movieToAdd, @RequestParam(name = "posterImage") MultipartFile file) {
+        if (file.isEmpty()) {
+            movieService.save(movieToAdd);
+        } else {
+            movieService.saveMovieWithPicture(movieToAdd, file);
+        }
         Long id = movieToAdd.getId();
         return "redirect:/movies/" + id + "/edit";
     }
@@ -107,8 +112,12 @@ public class MovieController {
     }
 
     @PostMapping("/movies/{id}/edit/editDetails")
-    public String movieEditDetails(@PathVariable(name = "id") Long movieId, Movie movie) {
-        movieService.save(movie);
+    public String movieEditDetails(@PathVariable(name = "id") Long movieId, Movie movie, @RequestParam(name = "posterImage", required = false) MultipartFile file) {
+        if (file.isEmpty()) {
+            movieService.save(movie);
+        } else {
+            movieService.saveMovieWithPicture(movie, file);
+        }
         return "redirect:/movies/" + movieId + "/edit";
     }
 
