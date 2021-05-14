@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
 import pl.lukakan.showstracker.show.model.Genre;
 import pl.lukakan.showstracker.show.model.Movie;
+import pl.lukakan.showstracker.show.utils.MoviePosterUtils;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,5 @@
 package pl.lukakan.showstracker.show.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
@@ -19,7 +17,7 @@ public class Movie {
     private String title;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate premiereDate;
-    private String posterImageName;
+    private String posterImageFilePath;
     private String description;
     private Double averageRate;
     private Integer numberOfRates;
@@ -31,12 +29,6 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private Set<Genre> genres;
-
-    @Transient
-    private String moviePosterSaveDir = "poster/";
-
-    @Transient
-    private String posterImagePath;
 
     public Movie() {
 
@@ -115,23 +107,12 @@ public class Movie {
         this.genres = genres;
     }
 
-    public String getPosterImageName() {
-        return posterImageName;
+    public String getPosterImageFilePath() {
+        return posterImageFilePath;
     }
 
-    public void setPosterImageName(String posterImageSrc) {
-        this.posterImageName = posterImageSrc;
+    public void setPosterImageFilePath(String posterImageSrc) {
+        this.posterImageFilePath = posterImageSrc;
     }
 
-
-    @Transient
-    public String getPosterImagePath() {
-        if (posterImageName == null || id == null) return null;
-        return moviePosterSaveDir + id + "/" + posterImageName;
-    }
-
-    @Transient
-    public String getMoviePosterSaveDir() {
-        return moviePosterSaveDir;
-    }
 }

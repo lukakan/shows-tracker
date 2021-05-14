@@ -1,4 +1,4 @@
-package pl.lukakan.showstracker.show;
+package pl.lukakan.showstracker.show.utils;
 
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,12 +23,12 @@ public class FileUploadUtils {
         }
 
         try (InputStream inputStream = multipartFile.getInputStream()) {
-//            File file = new File(uploadPath.toString());
-//            for (File f : file.listFiles()) {
-//                if (!f.isDirectory()) {
-//                    f.delete();
-//                }
-//            }
+            File file = new File(uploadPath.toString());
+            for (File f : file.listFiles()) {
+                if (!f.isDirectory()) {
+                    f.delete();
+                }
+            }
             Path filePath = uploadPath.resolve(fileName);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
             return fileName;

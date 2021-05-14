@@ -1,9 +1,7 @@
 package pl.lukakan.showstracker.show;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
@@ -12,6 +10,8 @@ import pl.lukakan.showstracker.show.model.Genre;
 import pl.lukakan.showstracker.show.model.Movie;
 import pl.lukakan.showstracker.show.repository.GenreRepository;
 import pl.lukakan.showstracker.show.repository.MovieRepository;
+import pl.lukakan.showstracker.show.utils.FileUploadUtils;
+import pl.lukakan.showstracker.show.utils.MoviePosterUtils;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -25,12 +25,14 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final GenreRepository genreRepository;
     private final RoleRepository roleRepository;
+    private final MoviePosterUtils moviePosterUtils;
 
     @Autowired
-    public MovieService(MovieRepository movieRepository, GenreRepository genreRepository, RoleRepository roleRepository) {
+    public MovieService(MovieRepository movieRepository, GenreRepository genreRepository, RoleRepository roleRepository, MoviePosterUtils moviePosterUtils) {
         this.movieRepository = movieRepository;
         this.genreRepository = genreRepository;
         this.roleRepository = roleRepository;
+        this.moviePosterUtils = moviePosterUtils;
     }
 
     public Optional<Movie> getById(Long id) {
@@ -50,8 +52,9 @@ public class MovieService {
         }
 
         try {
-            String posterFileName = FileUploadUtils.saveFileAndReturnFileName(movieWithId.getMoviePosterSaveDir(), movieWithId.getId(), movieWithId.getTitle(), file);
-            movieWithId.setPosterImageName(posterFileName);
+            String posterFileName = FileUploadUtils.saveFileAndReturnFileName(moviePosterUtils.getMoviePosterSaveDir(), movieWithId.getId(), movieWithId.getTitle(), file);
+            String posterImageFilePath = moviePosterUtils.createPosterImagePath(movieWithId.getId(), posterFileName);
+            movieWithId.setPosterImageFilePath(posterImageFilePath);
             movieRepository.save(movieWithId);
         } catch (IOException e) {
             e.printStackTrace();

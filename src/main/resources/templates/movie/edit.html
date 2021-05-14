@@ -12,7 +12,7 @@
             <div style="font-size: 20px; color: #f50e0e"><i class="fas fa-wrench"></i> Widok edycji</div>
             <h2 th:text="|*{title} (*{premiereDate.getYear()})|"></h2>
             <div class="col-4">
-                <img class="movie-image" th:src="@{|/${movieToDisplay.posterImagePath}|}">
+                <img class="movie-image" th:src="@{|/${movieToDisplay.getPosterImageFilePath()}|}">
             </div>
             <div class="col-8">
                 <a th:href="@{|/movies/rate?id=*{id}&rate=1|}" style="color: black">
