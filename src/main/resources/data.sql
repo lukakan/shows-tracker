@@ -20,7 +20,7 @@ INSERT INTO movie(title, premiere_date, description, poster_image_file_path)
 VALUES ('Gran Torino', '2008-12-09',
         'Walt Kowalski to emerytowany weteran żyjący we własnym poukładanym świecie. ' ||
         'Jego spokój zostaje zburzony przez nowych sąsiadów z Azji, których syn spróbuje ukraść mu ulubione auto.',
-        'poster/1/1_Gran_Torino_2021-05-01.png'),
+        'poster/1/1_Gran_Torino_2021-05-01.jpg'),
        ('SWEENEY TODD', '2007-12-03',
         'Golibroda wraca do wiktoriańskiego Londynu, by zemścić się na porywaczu żony i córki. We współpracy z sąsiadką otwiera zakład fryzjerski, dzięki któremu restauracja wspólniczki zaopatrywana jest w nadzienie do pasztecików.',
         'poster/2/2_Sweeney Tod_2021-05-02.png'),
