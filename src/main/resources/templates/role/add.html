@@ -29,7 +29,7 @@
 
                 <div class="m-3">
                     <label for="function" class="form-label">Funkcja w filmie</label>
-                    <select id="function" th:field="*{function}" class="form-select">
+                    <select id="function" th:field="*{functionType}" class="form-select">
                         <option th:each="function:${functions}" th:value="${function}"
                                 th:text="${function.name}"></option>
                     </select>

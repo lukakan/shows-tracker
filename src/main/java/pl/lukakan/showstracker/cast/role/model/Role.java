@@ -4,8 +4,6 @@ import pl.lukakan.showstracker.cast.person.model.Person;
 import pl.lukakan.showstracker.show.model.Movie;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Role {
@@ -18,7 +16,7 @@ public class Role {
     @ManyToOne
     private Movie movie;
     @Enumerated(EnumType.STRING)
-    private Function function;
+    private Function functionType;
 
     public Long getId() {
         return id;
@@ -52,11 +50,11 @@ public class Role {
         this.movie = movie;
     }
 
-    public Function getFunction() {
-        return function;
+    public Function getFunctionType() {
+        return functionType;
     }
 
-    public void setFunction(Function function) {
-        this.function = function;
+    public void setFunctionType(Function function) {
+        this.functionType = function;
     }
 }

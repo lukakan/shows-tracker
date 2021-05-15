@@ -1,7 +1,6 @@
 package pl.lukakan.showstracker.cast.person.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.lukakan.showstracker.cast.person.model.Gender;
 import pl.lukakan.showstracker.cast.role.model.Function;
 import pl.lukakan.showstracker.cast.role.model.Role;
 
@@ -33,7 +32,7 @@ public class Person {
     }
 
     public Set<Function> functions() {
-        return roles.stream().map(Role::getFunction).collect(Collectors.toSet());
+        return roles.stream().map(Role::getFunctionType).collect(Collectors.toSet());
     }
 
     public void setRoles(List<Role> roles) {

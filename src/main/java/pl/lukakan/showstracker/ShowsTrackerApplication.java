@@ -10,8 +10,6 @@ public class ShowsTrackerApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(ShowsTrackerApplication.class, args);
-        MoviePosterUtils moviePosterUtils = context.getBean(MoviePosterUtils.class);
-        System.out.println(moviePosterUtils.getMoviePosterSaveDir());
     }
 
 }

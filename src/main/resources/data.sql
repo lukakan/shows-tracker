@@ -28,7 +28,7 @@ VALUES ('Gran Torino', '2008-12-09',
         'Jego akcja toczy się krótko po zakończeniu wojny secesyjnej. Głównym bohaterem historii jest weteran, kapitan Jeffrey Kidd (niezawodny Tom Hanks), który jeździ od miasta do miasta i za niewielką opłatą czyta mieszkańcom miasteczek wiadomości.',
         'poster/3/3_Nowiny ze świata_21-05-02.png');
 
-INSERT INTO role(name, person_id, movie_id, function)
+INSERT INTO role(name, person_id, movie_id, function_type)
 VALUES ('Walt Kowalski', 1, 1, 'ACTOR'),
        ('', 1, 1, 'DIRECTOR'),
        ('Hair Cutter', 3, 1, 'ACTOR'),

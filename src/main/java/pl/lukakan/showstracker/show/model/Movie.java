@@ -37,7 +37,7 @@ public class Movie {
     /*TODO: figure out how to replace this function by service*/
     public String getDirectorName() {
         return roles.stream()
-                .filter(role -> role.getFunction().equals(Function.DIRECTOR))
+                .filter(role -> role.getFunctionType().equals(Function.DIRECTOR))
                 .map(role -> role.getPerson().getFirstName() + " " + role.getPerson().getLastName() + " ")
                 .reduce(String::concat).orElse("");
     }

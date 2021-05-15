@@ -69,7 +69,7 @@ public class MovieService {
 
     public List<Role> getActors(Movie movie) {
         return movie.getRoles().stream()
-                .filter(role -> role.getFunction().equals(Function.ACTOR))
+                .filter(role -> role.getFunctionType().equals(Function.ACTOR))
                 .collect(Collectors.toList());
     }
 
