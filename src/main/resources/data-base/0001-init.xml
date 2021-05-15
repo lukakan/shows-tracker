@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="lukakan" id="0001-init">
+        <createTable tableName="person">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
+            <column name="birth_date" type="date"/>
+            <column name="country" type="varchar(255)"/>
+            <column name="gender" type="varchar(10)"/>
+        </createTable>
+
+        <createTable tableName="movie">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="premiere_date" type="date"/>
+            <column name="poster_image_file_path" type="varchar(255)"/>
+            <column name="description" type="varchar(500)"/>
+            <column name="average_rate" type="float"/>
+            <column name="number_of_rates" type="int"/>
+        </createTable>
+
+        <createTable tableName="role">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="function" type="varchar(255)"/>
+            <column name="name" type="varchar(255)"/>
+            <column name="person_id" type="bigint">
+                <constraints nullable = "false"
+                             foreignKeyName="fk_role_person_id__person_id"
+                             referencedTableName="person"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="movie_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_role_movie_id__movie_id"
+                             referencedTableName="movie"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="genre">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="movies_genres">
+            <column name="movie_id"  type="bigint">
+                <constraints
+                        nullable="false"
+                        foreignKeyName="fk_movie_id__movie_id"
+                        referencedTableName="movie"
+                        referencedColumnNames="id"
+                />
+            </column>
+            <column name="genre_id" type="bigint">
+                <constraints
+                        nullable="false"
+                        foreignKeyName="fk_genre_id__genre_id"
+                        referencedTableName="genre"
+                        referencedColumnNames="id"
+                />
+            </column>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>
