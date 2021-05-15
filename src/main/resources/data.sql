@@ -1,9 +1,9 @@
-INSERT INTO person (first_name, last_name, birth_date, country, gender)
-VALUES ('Clint', 'Eastwood', '1930-05-31', 'USA', 'MALE'),
-       ('Johnny', 'Deep', '1963-06-09', 'USA', 'MALE'),
-       ('John Carroll', 'Lynch', '1963-08-01', 'USA', 'MALE'),
-       ('Helena Bonham', 'Carter', '1966-05-26', 'Anglia', 'FEMALE'),
-       ('Tim', 'Burton', '1958-08-25', 'USA', 'MALE');
+INSERT INTO person (first_name, last_name, birth_date, country, gender, height)
+VALUES ('Clint', 'Eastwood', '1930-05-31', 'USA', 'MALE', 193),
+       ('Johnny', 'Deep', '1963-06-09', 'USA', 'MALE', 178),
+       ('John Carroll', 'Lynch', '1963-08-01', 'USA', 'MALE', 193),
+       ('Helena Bonham', 'Carter', '1966-05-26', 'Anglia', 'FEMALE', 153),
+       ('Tim', 'Burton', '1958-08-25', 'USA', 'MALE', 182);
 
 INSERT INTO genre (name)
 VALUES ('COMEDY'),

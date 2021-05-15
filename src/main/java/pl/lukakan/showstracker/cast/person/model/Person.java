@@ -22,6 +22,7 @@ public class Person {
     private String country;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    private Integer height;
 
     @OneToMany(mappedBy = "person")
     private List<Role> roles;
@@ -85,5 +86,13 @@ public class Person {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 }

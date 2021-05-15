@@ -1,5 +1,7 @@
 package pl.lukakan.showstracker.cast.role.model;
 
+import java.util.Arrays;
+
 public enum Function {
     ACTOR("Aktor"), DIRECTOR("Reżyser"), WRITER("Scenarzysta");
 
@@ -11,5 +13,14 @@ public enum Function {
 
     public String getName() {
         return name;
+    }
+
+    public static Function getFunctionByName(String name) {
+        for (Function value : Function.values()) {
+            if (value.getName().equals(name)) {
+                return value;
+            }
+        }
+        return null;
     }
 }

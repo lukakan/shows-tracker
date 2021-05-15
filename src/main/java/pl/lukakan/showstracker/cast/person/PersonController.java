@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.lukakan.showstracker.cast.person.model.Gender;
 import pl.lukakan.showstracker.cast.person.model.Person;
+import pl.lukakan.showstracker.cast.role.model.Function;
 
 @Controller
 public class PersonController {
@@ -38,5 +40,12 @@ public class PersonController {
     public String addPerson(Person person) {
         personService.save(person);
         return "redirect:/movies";
+    }
+
+    @GetMapping("persons/function")
+    public String getPersonsInFunctionPage(@RequestParam(name = "functionType") String functionType, Model model) {
+        model.addAttribute("persons", personService.findAllPersonInFunction(functionType));
+        model.addAttribute("functions", personService.getFunctions());
+        return "person/list";
     }
 }

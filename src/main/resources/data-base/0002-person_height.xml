@@ -6,6 +6,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="0001-init.xml" relativeToChangelogFile="true"/>
-    <include file="0002-person_height.xml" relativeToChangelogFile="true"/>
+    <changeSet author="lukakan" id="0002-person_height">
+        <addColumn tableName="Person">
+            <column name="height" type="int"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

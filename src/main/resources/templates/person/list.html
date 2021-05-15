@@ -11,7 +11,7 @@
     <div class="submenu">
         <ul>
             <li th:each="function:${functions}">
-                <a th:href="@{|/movies/genres?category=${function.name}|}" th:text="${function.name}"></a>
+                <a th:href="@{|/persons/function?functionType=${function.name}|}" th:text="${function.name}"></a>
             </li>
         </ul>
     </div>
@@ -29,6 +29,7 @@
                         <p class="description" th:text="|Data urodzenia: *{birthDate}|"></p>
                         <p class="description" th:text="|Płeć: *{gender.name}|"></p>
                         <p class="description" th:text="|Kraj: *{country}|"></p>
+                        <p class="description" th:text="|Wzrost: *{height}|"></p>
                     </div>
                 </div>
                 <hr>

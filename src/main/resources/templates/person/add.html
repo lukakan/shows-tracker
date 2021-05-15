@@ -32,6 +32,10 @@
                         <input class="form-control" type="date" id="birth_date" th:field="*{birthDate}">
                     </div>
                     <div class="m-3">
+                        <label for="height" class="form-label">Wzrost</label>
+                        <input class="form-control" type="number" id="height" th:field="*{height}">
+                    </div>
+                    <div class="m-3">
                         <label for="gender" class="form-label">Płeć</label>
                         <select id = "gender" th:field="*{gender}">
                             <option th:each="gender:${genders}" th:value="${gender}" th:text="${gender.name}"></option>
