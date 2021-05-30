@@ -9,7 +9,8 @@ Application must ensure following functions:
 * rate movie
 * add/edit/delete movies
 * relations one to many, many to one with other entities (genres, roles ect.)<br>
-
+* database migration script Liquibase
+* configuration profiles
 Entities need to be stored in database using Spring Data.<br>
 
 ---
@@ -19,4 +20,5 @@ Entities need to be stored in database using Spring Data.<br>
 * Spring data JPA
 * Thymeleaf
 * Html, css
+* Liguibase
 
