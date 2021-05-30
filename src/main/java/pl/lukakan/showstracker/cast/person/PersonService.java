@@ -36,8 +36,7 @@ public class PersonService {
 
     public Set<Person> findAllPersonInFunction(String functionName) {
         Function function = Function.getFunctionByName(functionName);
-        List<Role> roles = roleRepository.findAllByFunctionType(function);
-        return roles.stream().map(role -> role.getPerson()).collect(Collectors.toSet());
+        return roleRepository.findAllByFunctionType(function);
     }
 
     public void save(Person person) {
