@@ -8,4 +8,5 @@
 
     <include file="0001-init.xml" relativeToChangelogFile="true"/>
     <include file="0002-person_height.xml" relativeToChangelogFile="true"/>
+    <include file="0003-user_user_roles.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
