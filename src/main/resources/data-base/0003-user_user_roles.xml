@@ -26,10 +26,9 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="user_role" type="varchar(50)"/>
+            <column name="role" type="varchar(50)"/>
             <column name="user_id" type="bigint">
-                <constraints nullable="false"
-                             foreignKeyName="fk_user_role_user_id__user_id"
+                <constraints foreignKeyName="fk_user_role_user_id__user_id"
                              referencedTableName="user"
                              referencedColumnNames="id"
                 />

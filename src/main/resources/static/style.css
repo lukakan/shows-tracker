@@ -141,3 +141,13 @@ a:hover{
     padding: 5px;
 }
 
+.justified-container{
+    text-align: center;
+    margin: 150px auto 0;
+    width: 30em;
+}
+
+.sign-in{
+    padding: 20px;
+}
+

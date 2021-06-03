@@ -1,4 +1,4 @@
-package pl.lukakan.showstracker.user;
+package pl.lukakan.showstracker.user.model;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,7 +11,7 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<UserRole> userRole;
 
     public Long getId() {

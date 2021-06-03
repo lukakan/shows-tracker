@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main class="content" layout:fragment="content">
+    <div class="container">
+        <div class="justified-container">
+            <div class="sign-in">
+                <a class="details-link" th:href="@{/login}"> Zaloguj się </a>
+            </div>
+            <div class="sign-in">
+                <a class="details-link" th:href="@{/register}"> Utwórz konto </a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

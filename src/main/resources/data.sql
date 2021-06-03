@@ -42,3 +42,9 @@ VALUES (1, 4),
        (2, 8),
        (3, 9),
        (3, 4);
+
+INSERT INTO user(id, user_name, email, password)
+VALUES (1, 'roman','example@gmail.com' , '{noop}qwerty');
+
+INSERT INTO user_role(id, user_id, role)
+VALUES(1, 1, 'ROLE_USER');

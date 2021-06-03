@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" th:src="@{/myScript.js}"></script>
+</head>
+<body>
+    <main class="content" layout:fragment="content">
+        <div class="container col-6">
+            <h1>Logowanie</h1>
+            <form th:action="@{/register}" method="post" th:object="${user}" onsubmit="return checkPasswords(this)">
+                <div class="mb-3">
+                    <label for="login" class="form-label">Nazwa użytkownika</label>
+                    <input type="text" class="form-control" id="login" name="username" th:field="*{userName}">
+                </div>
+                <div class="mb-3">
+                    <label for="mail" class="form-label">e-mail</label>
+                    <input type="email" class="form-control" id="mail" name="username" th:field="*{email}">
+                </div>
+                <div class="mb-3">
+                    <div id="password-information"></div>
+                    <label for="password" class="form-label">Hasło</label>
+                    <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+                </div>
+                <div class="mb-3">
+                    <div id="repeated-password-information"></div>
+                    <label for="repeated-password" class="form-label">Powtórz Hasło</label>
+                    <input type="password" class="form-control" id="repeated-password" name="repeatedPassword" th:field="*{password}">
+                </div>
+                <button type="submit" class="btn btn-dark px-3">Zarejestruj</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package pl.lukakan.showstracker.user;
+package pl.lukakan.showstracker.user.model;
 
 import javax.persistence.*;
 
@@ -9,9 +9,17 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(value = EnumType.STRING)
-    private Role userRole;
+    private Role role;
     @ManyToOne
     private User user;
+
+    public UserRole() {
+    }
+
+    public UserRole(User user, Role role) {
+        this.role = role;
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -21,12 +29,12 @@ public class UserRole {
         this.id = id;
     }
 
-    public Role getUserRole() {
-        return userRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserRole(Role userRole) {
-        this.userRole = userRole;
+    public void setRole(Role userRole) {
+        this.role = userRole;
     }
 
     public User getUser() {
