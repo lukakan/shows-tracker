@@ -9,7 +9,7 @@
     <main class="content" layout:fragment="content">
         <div class="container col-6">
             <h1>Logowanie</h1>
-            <p th:if="${error == true}" style="color: red">Niepoprawne dane logowania</p>
+            <p th:if="${error == true}" class="error">Niepoprawne dane logowania</p>
             <form th:action="@{/login}" method="post">
                 <div class="mb-3">
                     <label for="login" class="form-label">Nazwa użytkownika</label>

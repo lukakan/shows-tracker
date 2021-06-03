@@ -20,14 +20,14 @@
                     <input type="email" class="form-control" id="mail" name="username" th:field="*{email}">
                 </div>
                 <div class="mb-3">
-                    <div id="password-information"></div>
                     <label for="password" class="form-label">Hasło</label>
                     <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+                    <div id="password-information" class="error"></div>
                 </div>
                 <div class="mb-3">
-                    <div id="repeated-password-information"></div>
                     <label for="repeated-password" class="form-label">Powtórz Hasło</label>
-                    <input type="password" class="form-control" id="repeated-password" name="repeatedPassword" th:field="*{password}">
+                    <input type="password" class="form-control" id="repeated-password" name="repeatedPassword">
+                    <div id="repeated-password-information" class="error"></div>
                 </div>
                 <button type="submit" class="btn btn-dark px-3">Zarejestruj</button>
             </form>

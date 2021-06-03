@@ -26,9 +26,6 @@ public class UserService {
         String encryptedPassword = passwordEncoder.encode(rawPassword);
         userDto.setPassword(encryptedPassword);
         User user = fromDto(userDto);
-        Set<UserRole> defaultUserRole = Set.of(new UserRole(user, Role.ROLE_USER));
-       // List<UserRole> defaultUserRole = Collections.singletonList(new UserRole(user, Role.ROLE_USER));
-        user.setUserRole(new HashSet<>(defaultUserRole));
         userRepository.save(user);
     }
 
@@ -37,6 +34,8 @@ public class UserService {
         user.setUserName(userDto.getUserName());
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
+        Set<UserRole> defaultUserRole = Set.of(new UserRole(user, Role.ROLE_USER));
+        user.setUserRole(new HashSet<>(defaultUserRole));
         return user;
     }
 }
