@@ -12,11 +12,14 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="user_name" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false"
+                unique="true"/>
             </column>
             <column name="email" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
