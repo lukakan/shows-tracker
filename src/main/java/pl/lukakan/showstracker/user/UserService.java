@@ -4,21 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.lukakan.showstracker.user.model.Role;
-import pl.lukakan.showstracker.user.model.User;
-import pl.lukakan.showstracker.user.model.UserDto;
-import pl.lukakan.showstracker.user.model.UserRole;
+import pl.lukakan.showstracker.user.model.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -38,7 +38,7 @@ public class UserService {
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
         Set<UserRole> defaultUserRole = Set.of(new UserRole(user, Role.ROLE_USER));
-        user.setUserRole(new HashSet<>(defaultUserRole));
+        user.setUserRoles(new HashSet<>(defaultUserRole));
         return user;
     }
 
@@ -49,6 +49,9 @@ public class UserService {
         userDto.setId(user.getId());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
+        userDto.setRoles(user.getUserRoles().stream()
+                .map(UserRole::getRole)
+                .collect(Collectors.toSet()));
 
         return userDto;
     }
@@ -100,6 +103,34 @@ public class UserService {
             userRepository.save(user);
         } else {
             throw new UsernameNotFoundException("User name " + userName + " not found");
+        }
+    }
+
+    public Set<UserDto> findAllExceptCurrent(String currentUserName) {
+        Set<User> users = userRepository.findByUserNameNot(currentUserName);
+        return users.stream().map(this::toDto).collect(Collectors.toSet());
+    }
+
+
+    public void promoteUserToAdmin(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            UserRole userRole = new UserRole(user, Role.ROLE_ADMIN);
+            userRoleRepository.save(userRole);
+            user.addUserRole(userRole);
+            userRepository.save(user);
+        }
+    }
+
+    public void degradeAdmin(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            UserRole userRole = userRoleRepository.findByUserAndRole(user, Role.ROLE_ADMIN);
+            user.removeUserRole(userRole);
+            userRoleRepository.delete(userRole);
+            userRepository.save(user);
         }
     }
 }

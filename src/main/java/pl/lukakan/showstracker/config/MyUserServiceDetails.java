@@ -33,7 +33,7 @@ public class MyUserServiceDetails implements UserDetailsService {
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            Collection<SimpleGrantedAuthority> roles = user.getUserRole().stream()
+            Collection<SimpleGrantedAuthority> roles = user.getUserRoles().stream()
                     .map(userRole -> new SimpleGrantedAuthority(userRole.getRole().name()))
                     .collect(Collectors.toSet());
             return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), roles);

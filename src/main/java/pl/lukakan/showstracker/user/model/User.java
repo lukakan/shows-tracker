@@ -14,8 +14,8 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    private Set<UserRole> userRole;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Set<UserRole> userRoles;
 
     public Long getId() {
         return id;
@@ -49,12 +49,12 @@ public class User {
         this.password = password;
     }
 
-    public Set<UserRole> getUserRole() {
-        return userRole;
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setUserRoles(Set<UserRole> userRole) {
+        this.userRoles = userRole;
     }
 
     public String getFirstName() {
@@ -71,5 +71,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void addUserRole(UserRole userRole) {
+        userRoles.add(userRole);
+    }
+
+    public void removeUserRole(UserRole userRole) {
+        userRoles.remove(userRole);
     }
 }

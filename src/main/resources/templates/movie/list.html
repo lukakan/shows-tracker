@@ -18,7 +18,7 @@
     <div class="container">
         <ul>
             <li th:each="movie:${movies}" th:object="${movie}">
-                <h2 class = "movie-title" th:text="|*{title} (*{premiereDate.getYear()})|"></h2>
+                <h2 class = "showtracker-title" th:text="|*{title} (*{premiereDate.getYear()})|"></h2>
                 <div class="row m-3">
                     <div class="col-4">
                         <img class="movie-image" th:src="@{|/${movie.getPosterImageFilePath()}|}">

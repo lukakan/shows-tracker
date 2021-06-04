@@ -6,8 +6,14 @@
     <title>Title</title>
 </head>
 <body>
-    <main class="container" layout:replace="content">
-        <h1 th:text="${msg}"></h1>
-    </main>
+
+<main class="content" layout:fragment="content">
+    <div class="container">
+        <div class="justified-container">
+            <h1>ERROR PAGE</h1>
+            <p th:text="${msg}"></p>
+        </div>
+    </div>
+</main>
 </body>
 </html>

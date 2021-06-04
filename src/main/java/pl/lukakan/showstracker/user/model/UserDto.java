@@ -1,8 +1,6 @@
 package pl.lukakan.showstracker.user.model;
 
-import javax.persistence.*;
 import java.util.Set;
-
 
 public class UserDto {
 
@@ -12,6 +10,8 @@ public class UserDto {
     private String password;
     private String firstName;
     private String lastName;
+
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -59,5 +59,13 @@ public class UserDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
