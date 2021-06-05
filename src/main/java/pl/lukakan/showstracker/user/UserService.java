@@ -12,13 +12,11 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -93,7 +91,7 @@ public class UserService {
             if (isOldPasswordValid(oldPasswordProvidedByUser, oldPasswordFromDb)) {
                 saveUserWithProvidedPassword(newPassword, user);
             } else {
-                throw new IllegalArgumentException("Provided old password for verefication is not correct");
+                throw new IllegalArgumentException("Provided old password for verification is not correct");
             }
         } else {
             throw new UsernameNotFoundException("User name " + userName + " not found");
@@ -117,7 +115,6 @@ public class UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             UserRole userRole = new UserRole(user, Role.ROLE_ADMIN);
-            //userRoleRepository.save(userRole);
             user.addUserRole(userRole);
             userRepository.save(user);
         }
@@ -127,9 +124,7 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            // UserRole userRole = userRoleRepository.findByUserAndRole(user, Role.ROLE_ADMIN);
             user.removeUserRole(Role.ROLE_ADMIN);
-            //userRoleRepository.delete(userRole);
             userRepository.save(user);
         }
     }
