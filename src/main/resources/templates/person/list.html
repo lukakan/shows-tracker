@@ -18,7 +18,7 @@
     <div class="container">
         <ul>
             <li th:each="person:${persons}" th:object="${person}">
-                <h2 class = "movie-title" th:text="|*{firstName} *{lastName}|"></h2>
+                <h2 class = "showtracker-title" th:text="|*{firstName} *{lastName}|"></h2>
                 <ul class="description" style="display: flex; font-size: 20px;">
                     <li style="margin-right: 6px; font-style: italic;" th:each="f:${person.functions()}">
                         <p th:text="|${f.name}|"></p>

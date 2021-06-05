@@ -42,3 +42,18 @@ VALUES (1, 4),
        (2, 8),
        (3, 9),
        (3, 4);
+
+INSERT INTO user(id, user_name, email, password, first_name, last_name)
+VALUES
+(1, 'roman','example@gmail.com' , '{noop}qwerty', 'Romuald', 'Polański'),
+(2, 'admin','example@gmail.com' , '{noop}qwerty', 'Edek', 'Polański'),
+(3, 'someuser','example@gmail.com' , '{noop}qwerty', 'Grzegorz', 'Nowak'),
+(4, 'superuser','adi@gmail.com' , '{noop}qwerty', 'Adrian', 'Kowalski');
+
+INSERT INTO user_role(id, user_id, role)
+VALUES
+(1, 1, 'ROLE_USER'),
+(2, 3, 'ROLE_USER'),
+(3, 2, 'ROLE_ADMIN'),
+(4, 4, 'ROLE_ADMIN'),
+(5, 4, 'ROLE_USER');

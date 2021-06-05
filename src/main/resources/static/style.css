@@ -65,7 +65,7 @@ a:hover{
     height: auto;
 }
 
-.movie-title{
+.showtracker-title{
     color: #ffd72b
 }
 
@@ -139,5 +139,19 @@ a:hover{
     border: solid;
     border-width: thin;
     padding: 5px;
+}
+
+.justified-container{
+    text-align: center;
+    margin: 150px auto 0;
+    width: 30em;
+}
+
+.sign-in{
+    padding: 20px;
+}
+
+.error{
+    color: red;
 }
 
