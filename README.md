@@ -11,7 +11,8 @@ Application must ensure following functions:
 * relations one to many, many to one with other entities (genres, roles ect.)<br>
 * database migration script Liquibase
 * configuration profiles
-Entities need to be stored in database using Spring Data.<br>
+* users registration, login, changing data, admin roles
+</br>
 
 ---
 *Used tech:*
@@ -19,6 +20,7 @@ Entities need to be stored in database using Spring Data.<br>
 * Spring boot
 * Spring data JPA
 * Thymeleaf
-* Html, css
+* Html, css, js
 * Liguibase
+* Spring Security
 

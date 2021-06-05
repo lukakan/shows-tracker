@@ -14,7 +14,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private Set<UserRole> userRoles;
 
     public Long getId() {
@@ -77,7 +77,7 @@ public class User {
         userRoles.add(userRole);
     }
 
-    public void removeUserRole(UserRole userRole) {
-        userRoles.remove(userRole);
+    public void removeUserRole(Role role) {
+        userRoles.removeIf(userRole -> userRole.getRole().equals(role));
     }
 }

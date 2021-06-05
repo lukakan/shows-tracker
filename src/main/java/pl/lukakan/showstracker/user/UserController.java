@@ -3,6 +3,7 @@ package pl.lukakan.showstracker.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +45,7 @@ public class UserController {
     public String editUserDataForm(Authentication authentication, UserDto editedUser, RedirectAttributes redirectAttributes) {
         String userName = authentication.getName();
         if (!(userName.equals(editedUser.getUserName()))) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Możesz edytować tylko konto: " + userName);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Niepoprawne dane");
         } else {
             userService.updateUserDetails(userName, editedUser);
             redirectAttributes.addFlashAttribute("feedback", "success");
@@ -65,11 +66,13 @@ public class UserController {
                                  RedirectAttributes redirectAttributes,
                                  Authentication authentication) {
         String userName = authentication.getName();
-        if (userService.isOldPasswordValid(userName, oldPassword)) {
-            userService.updateUserPassword(userName, newPassword);
+
+        try {
+            userService.updateUserPassword(userName, newPassword, oldPassword);
             redirectAttributes.addFlashAttribute("feedback", "success");
-        } else {
+        } catch (UsernameNotFoundException | IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("feedback", "fail");
+            e.printStackTrace();
         }
         return "redirect:/user/profile";
     }

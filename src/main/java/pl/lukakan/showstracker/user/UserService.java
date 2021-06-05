@@ -24,21 +24,17 @@ public class UserService {
 
     public void registerUser(UserDto userDto) {
         String rawPassword = userDto.getPassword();
-        String encryptedPassword = passwordEncoder.encode(rawPassword);
-        userDto.setPassword(encryptedPassword);
         User user = fromDto(userDto);
-        userRepository.save(user);
+        saveUserWithProvidedPassword(rawPassword, user);
     }
 
     private User fromDto(UserDto userDto) {
         User user = new User();
         user.setUserName(userDto.getUserName());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
-        Set<UserRole> defaultUserRole = Set.of(new UserRole(user, Role.ROLE_USER));
-        user.setUserRoles(new HashSet<>(defaultUserRole));
+        user.setUserRoles(Set.of(new UserRole(user, Role.ROLE_USER)));
         return user;
     }
 
@@ -85,25 +81,29 @@ public class UserService {
 
     }
 
-    public boolean isOldPasswordValid(String userName, String oldPassword) {
-        Optional<User> userOptional = userRepository.findByUserName(userName);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return passwordEncoder.matches(oldPassword, user.getPassword());
-        }
-        return false;
+    private boolean isOldPasswordValid(String oldPasswordProvidedByUser, String oldPasswordFromDb) {
+        return passwordEncoder.matches(oldPasswordProvidedByUser, oldPasswordFromDb);
     }
 
-    public void updateUserPassword(String userName, String newPassword) {
+    public void updateUserPassword(String userName, String newPassword, String oldPasswordProvidedByUser) {
         Optional<User> userOptional = userRepository.findByUserName(userName);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            String encodedPassword = passwordEncoder.encode(newPassword);
-            user.setPassword(encodedPassword);
-            userRepository.save(user);
+            String oldPasswordFromDb = user.getPassword();
+            if (isOldPasswordValid(oldPasswordProvidedByUser, oldPasswordFromDb)) {
+                saveUserWithProvidedPassword(newPassword, user);
+            } else {
+                throw new IllegalArgumentException("Provided old password for verefication is not correct");
+            }
         } else {
             throw new UsernameNotFoundException("User name " + userName + " not found");
         }
+    }
+
+    private void saveUserWithProvidedPassword(String password, User user) {
+        String encodedPassword = passwordEncoder.encode(password);
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
     }
 
     public Set<UserDto> findAllExceptCurrent(String currentUserName) {
@@ -117,7 +117,7 @@ public class UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             UserRole userRole = new UserRole(user, Role.ROLE_ADMIN);
-            userRoleRepository.save(userRole);
+            //userRoleRepository.save(userRole);
             user.addUserRole(userRole);
             userRepository.save(user);
         }
@@ -127,9 +127,9 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            UserRole userRole = userRoleRepository.findByUserAndRole(user, Role.ROLE_ADMIN);
-            user.removeUserRole(userRole);
-            userRoleRepository.delete(userRole);
+            // UserRole userRole = userRoleRepository.findByUserAndRole(user, Role.ROLE_ADMIN);
+            user.removeUserRole(Role.ROLE_ADMIN);
+            //userRoleRepository.delete(userRole);
             userRepository.save(user);
         }
     }

@@ -27,12 +27,12 @@
                     <div class="col-4">
                         <div th:if="${#lists.contains(user.getRoles(), admin)}">
                             <p>
-                                <a class="details-link" th:href="@{|/users/${user.id}/degrade/|}"> <i class="fas fa-eraser"></i> Zabierz admina </a>
+                                <a class="details-link" th:href="@{|/admin/users/${user.id}/degrade/|}"> <i class="fas fa-eraser"></i> Zabierz admina </a>
                             </p>
                         </div>
                         <div th:unless="${#lists.contains(user.getRoles(), admin)}">
                             <p>
-                                <a class="details-link" th:href="@{|/users/${user.id}/promote|}"> <i class="fas fa-mask"></i> Daj admina</a>
+                                <a class="details-link" th:href="@{|/admin/users/${user.id}/promote|}"> <i class="fas fa-mask"></i> Daj admina</a>
                             </p>
                         </div>
                     </div>
